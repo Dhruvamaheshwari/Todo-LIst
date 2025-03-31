@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="bg-linear-120 from-purple-500 to-pink-500">
+    <h1 class="bg-black h-16 text-5xl font-bold text-center text-white">My Todo List</h1>
+    <form action="" class="text-center mt-8">
+        <label for="task" class="font-bold text-xl">Enter the task</label><br>
+        <textarea name="" id="text"
+            class="border-2 resize rounded caret-white bg-amber-50 ring-2 hover:shadow-2xl shadow-black/50" cols="50"
+            rows="5"></textarea><br><br>
+        <button id="button" class="w-24 text-lg h-9 rounded text-white bg-black cursor-pointer ">Submit</button>
+    </form>
+
+
+    <script>
+        const addbutton = document.getElementById('button');
+        const task = document.getElementById('text');
+        // const list = document.getElementById('tasklist');
+        const list = document.createElement('ul');
+        list.id = 'tasklist';
+        document.body.append(list);
+
+        addbutton.addEventListener('click', function (event) {
+            event.preventDefault();
+            const tasktext = task.value.trim();
+            if (tasktext === '') return;
+
+            const itemlist = document.createElement('li');
+            itemlist.classList.add('text-lg');
+            itemlist.textContent = tasktext;
+
+            const rmbutton = document.createElement('button');
+            rmbutton.classList.add('text-lg', 'bg-black', 'text-white', 'cursor-pointer', 'rounded','ml-5','h-9','w-24','rounded');
+            rmbutton.textContent = 'Remove';
+
+            const newchild = document.createElement('div');
+            newchild.classList.add('border-4', 'h-[9%]','mt-9','w-[50%]','flex','ml-4','p-2','rounded-xl');
+            // itemlist.insertAdjacentElement("afterbegin",newchild);
+            newchild.appendChild(itemlist);
+            newchild.appendChild(rmbutton);
+            list.appendChild(newchild);
+
+            rmbutton.addEventListener('click', function (event) {
+                list.removeChild(newchild);
+            });
+            // // itemlist.appendChild(rmbutton);
+            // newchild.appendChild(rmbutton);
+            // newchild.appendChild(itemlist);
+            // newchild.appendChild(itemlist);
+            task.value = '';
+        });
+
+
+    </script>
+</body>
+
+</html>
